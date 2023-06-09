@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
-public class CubeController : MonoBehaviour
+public class CubeController : OVRGrabbable
 {
     private GameController scoreManager;
 
@@ -27,6 +28,13 @@ public class CubeController : MonoBehaviour
             GameController.npcScore--;
             Destroy(gameObject);
         }
+    }
+
+    // Override the base GrabBegin function
+    public override void GrabBegin(OVRGrabber hand, Collider grabPoint)
+    {
+        base.GrabBegin(hand, grabPoint);
+        GameController.OnCubeGrabbed();
     }
 
     // Update is called once per frame
