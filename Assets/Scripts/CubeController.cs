@@ -5,11 +5,11 @@ using UnityEngine;
 public class CubeController : MonoBehaviour
 {
     private GameController scoreManager;
+
     // Start is called before the first frame update
     void Start()
     {
         scoreManager = GameObject.Find("GameController").GetComponent<GameController>();
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -21,11 +21,14 @@ public class CubeController : MonoBehaviour
             // Destroy the cube
             Destroy(gameObject);
         }
+        // Character tag for NPC
+        else if (collision.gameObject.tag == "Character")
+        {
+            GameController.npcScore--;
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update() { }
 }
